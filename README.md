@@ -1,48 +1,102 @@
-# Gatsby Starter - WordPress Twenty Twenty
+![Home Page](./docs/homepage.png)
 
-A port of the WordPress Twenty Twenty theme to Gatsby. 
+# Gatsby Starter Blog
 
-**Works pretty well but still a work in progress**
+Another blog starter with enough features to be production ready out of the box
 
-This starter uses an early alpha version of the upcoming `gatsby-source-wordpress@v4`. You can find rough documentation for that package [here](https://github.com/TylerBarnes/gatsby/blob/feat/source-wordpress-v4/packages/gatsby-source-wordpress-experimental/README.md).
+## Features
 
-Checkout some options of the source plugin: [defaultPluginOptions](https://github.com/gatsbyjs/gatsby-source-wordpress-experimental/blob/master/src/models/gatsby-api.js#L6)
+- Easily have custom background images on a post by post basis by included a Wordpress Featured Image
+- Source posts from Wordpress using WPGraphQL
+- High performance
+- Config first setup
+- Extendable
+- Sort by Category
+- RSS generation
 
-## Plugin Versions
+## 🚀 Quick start
 
-Last tested with the following plugin versions.
+1.  **Create a Gatsby site.**
 
-- WPGraphQL: 0.12.1
-- WPGatsby: 0.4.16
-- gatsby-source-wordpress-experimental: 1.3.6
+    Use the Gatsby CLI to create a new site, specifying the blog starter.
 
-## WordPress Setup
+    ```shell
+    # create a new Gatsby site using the blog starter
+    gatsby new my-blog-starter https://github.com/zeevosec/gatsby-starter-wordpress-blog
+    ```
 
-1. Make sure to install the two required WP plugins [wp-gatsby](https://github.com/gatsbyjs/wp-gatsby) and [wp-graphql](https://github.com/wp-graphql/wp-graphql)
-2. Best you install and activate the default WordPress Twenty Twenty theme
-3. Make sure you have Menus with the following slugs: 
-   -  `primary` - Thats the top menu
-   -  `extended` - That is the menu that opens on the right side as drawer
-   -  `social-links-menu` - For the Social menu in the footer and in the expanded drawer
-      -  For the social Icons you need to adjust `SocialMenu.js`. There is a `SocialIcon` function that parses svgs depending on the Link label
-4. Rename `.env.example` file to `.env` and edit it with your domain variables.
-      
-## Limitations
+2. **Configure your environment**
 
--  Comments are not implemented yet.
--  The monthly archive pages are not implemented.
--  Tags are not implemented (only Categories).
--  Surely there is more. Feel free to suggest things as issues. 
+    Make a `.env` file at the root of this project with your WPGraphQL endpoint and WP Admin endpoint:
 
-## Links
+    Example:
 
-- [gatsby-source-wordpress-experimental](https://github.com/gatsbyjs/gatsby-source-wordpress-experimental)
-- [WPGatsby - WordPress Plugin](https://github.com/gatsbyjs/wp-gatsby)
-- [Twenty Twenty - WordPress Theme](https://de.wordpress.org/themes/twentytwenty/)
+    ```
+    # .env
+    WPGRAPHQL_URL=https://mywpsite.com/graphql
+    WP_ADMIN_URL=https//mywpsite.com/wp-login
+    ```
 
-## Acknowledgements
 
-- [NeverNull GmbH](https://nevernull.io) - The team I'm working with. Checkout what we are building here: [mobileui.dev](https://mobileui.dev)
-- [@TylerBarnes](https://github.com/TylerBarnes) - Head developer of gatsby-source-wordpress@v4
-- [@JasonBahl](https://github.com/jasonbahl) - Head developer of WPGraphQL
-- [@LouieChristie](https://github.com/louiechristie) - Open source contributor
+3.  **Start developing.**
+
+    Navigate into your new site’s directory and start it up.
+
+    ```shell
+    cd my-blog-starter/
+    gatsby develop
+    ```
+
+## 🧐 What's inside?
+
+A quick look at the top-level files and directories you'll see in a Gatsby project.
+
+    .
+    ├── node_modules
+    ├── src
+    ├── static
+    ├── .browserslistrc
+    ├── .gitignore
+    ├── .eslintrc
+    ├── .gitattributes
+    ├── .gitignore
+    ├── .prettierrc
+    ├── .travis.yml
+    ├── gatsby-config.js
+    ├── gatsby-node.js
+    ├── LICENSE
+    ├── package-lock.json
+    ├── package.json
+    ├── README.md
+    └── yarn.lock
+
+1.  **`/node_modules`**: This directory contains all of the modules of code that your project depends on (npm packages) are automatically installed.
+
+2.  **`/src`**: This directory will contain all of the code related to what you will see on the front-end of your site (what you see in the browser) such as your site header or a page template. `src` is a convention for “source code”.
+
+3.  **`/static`**: This directory will contain all of your static files that are used globally in the site. Like background images, or attachments.
+
+4.  **`.browserslistrc`**: Specifies which browser and what version we want our site to target.
+
+5.  **`.eslintrc`**: Eslint configuration, following mostly [Prettier](https://prettier.io/) defaults.
+
+6.  **`.gitattributes`**: Defines git attributes for paths
+
+7.  **`.gitignore`**: This file tells git which files it should not track / not maintain a version history for.
+
+8.  **`.prettierrc`**: This is a configuration file for [Prettier](https://prettier.io/). Prettier is a tool to help keep the formatting of your code consistent.
+
+9.  **`.travis.yml`**: A file used by Travis-CI to define actions or run tests and linting.
+
+10. **`gatsby-config.js`**: This is the main configuration file for a Gatsby site. This is where you can specify information about your site (metadata) like the site title and description, which Gatsby plugins you’d like to include, etc. (Check out the [config docs](https://www.gatsbyjs.org/docs/gatsby-config/) for more detail).
+
+11. **`gatsby-node.js`**: This file is where Gatsby expects to find any usage of the [Gatsby Node APIs](https://www.gatsbyjs.org/docs/node-apis/) (if any). These allow customization/extension of default Gatsby settings affecting pieces of the site build process.
+12. **`LICENSE`**: This starter is licensed under the MIT license.
+
+13. **`package-lock.json`** (See `package.json` below, first). This is an automatically generated file based on the exact versions of your npm dependencies that were installed for your project. Feel free to remove this if you are using Yarn. **(You won’t change this file directly).**
+
+14. **`package.json`**: A manifest file for Node.js projects, which includes things like metadata (the project’s name, author, etc). This manifest is how npm knows which packages to install for your project.
+
+15. **`README.md`**: This file! Edit me to make it yours!
+
+16. **`yarn.lock`**: A file useful for the package manager Yarn (like package-lock.json). Feel free to remove this if you are using NPM. **(You won’t change this file directly).**

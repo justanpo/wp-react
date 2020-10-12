@@ -1,33 +1,35 @@
-require("dotenv").config({
-  path: `.env`,
-})
-
-// require .env.development or .env.production
-require("dotenv").config({
-  path: `.env.${process.env.NODE_ENV}`,
-})
+require('dotenv').config();
 
 module.exports = {
   siteMetadata: {
-    title: `React WP site`,
-    description: `test React App`,
-    author: `@henrikwirth`,
+    rss: '/rss.xml',
+    adminUrl: process.env.WP_ADMIN_URL, // Something like https://mywpsite.com/wp-login
+    menu: [
+      {
+        title: 'Twitter',
+        uri: 'https://twitter.com/zeevosec',
+        external: true,
+      },
+      {
+        title: 'Home',
+        uri: '/',
+      },
+    ],
+    author: {
+      name: "Shane O'Neill",
+      twitter: 'https://twitter.com/zeevosec',
+      github: 'https://github.com/zeevosec',
+      avatar: '/icon.png',
+    },
   },
   plugins: [
-    `gatsby-plugin-notifications`,
+    `gatsby-plugin-react-helmet`,
+    `gatsby-transformer-sharp`,
     `gatsby-plugin-sharp`,
-    {
-      resolve: `gatsby-source-filesystem`,
-      options: {
-        name: `images`,
-        path: `${__dirname}/src/assets/images`,
-      },
-    },
-    `gatsby-plugin-netlify-cache`,
     {
       resolve: `gatsby-source-wordpress-experimental`,
       options: {
-        url: `http://andrey35.beget.tech/graphql`,
+        url: process.env.WPGRAPHQL_URL,
         verbose: true,
         develop: {
           hardCacheMediaFiles: true,
@@ -37,39 +39,30 @@ module.exports = {
             writeQueriesToDisk: true,
           },
         },
-        html: {
-          fallbackImageMaxWidth: 800,
-        },
-        // fields can be excluded globally.
-        // this example is for wp-graphql-gutenberg.
-        // since we can get block data on the `block` field
-        // we don't need these fields
-        excludeFieldNames: [`blocksJSON`, `saveContent`],
         type: {
           Post: {
             limit:
               process.env.NODE_ENV === `development`
                 ? // Lets just pull 50 posts in development to make it easy on ourselves.
-                  35
-                : // And then we can pull all posts in production
-                  null,
-          },
-          // this shows how to exclude entire types from the schema
-          // this example is for wp-graphql-gutenberg
-          CoreParagraphBlockAttributesV2: {
-            exclude: true,
+                  50
+                : // max of 50k posts
+                  50000,
           },
         },
       },
     },
-    `gatsby-transformer-sharp`,
     {
-      resolve: "gatsby-plugin-react-svg",
+      resolve: `gatsby-plugin-manifest`,
       options: {
-        rule: {
-          include: /\.inline\.svg$/, // See below to configure properly
-        },
+        name: `gatsby-starter-wordpress-blog`,
+        short_name: `starter`,
+        start_url: `/`,
+        background_color: `#663399`,
+        theme_color: `#663399`,
+        display: `minimal-ui`,
+        icon: `static/icon.png`, // This path is relative to the root of the site.
       },
     },
+    `gatsby-plugin-offline`,
   ],
-}
+};

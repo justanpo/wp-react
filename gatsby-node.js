@@ -1,67 +1,112 @@
-const path = require(`path`)
-const glob = require(`glob`)
+const _ = require('lodash');
+const Promise = require('bluebird');
+const path = require('path');
+const slash = require('slash');
+const moment = require('moment');
 
-const createBlog = require(`./create/createBlog`)
-const createContentTypes = require(`./create/createContentTypes`)
-const createCategories = require(`./create/createCategories`)
-const createAuthors = require(`./create/createAuthors`)
+exports.createPages = ({ graphql, actions }) => {
+  const { createPage } = actions;
 
-const getTemplates = () => {
-  const sitePath = path.resolve(`./`)
-  return glob.sync(`./src/templates/**/*.js`, { cwd: sitePath })
-}
+  return new Promise((resolve, reject) => {
+    const postTemplate = path.resolve('./src/templates/post-template.jsx');
+    const pageTemplate = path.resolve('./src/templates/page-template.jsx');
+    const categoryTemplate = path.resolve('./src/templates/category-template.jsx');
+    const tagTemplate = path.resolve('./src/templates/tag-template.jsx');
 
-exports.createPages = async (props) => {
-  const { data: wpSettings } = await props.graphql(/* GraphQL */ `
-    {
-      wp {
-        readingSettings {
-          postsPerPage
+    graphql(`
+      query {
+        allWpPost {
+          edges {
+            node {
+              id
+              title
+              slug
+              date
+              categories {
+                nodes {
+                  name
+                }
+              }
+            }
+          }
+        }
+        allWpPage {
+          edges {
+            node {
+              id
+              date
+              uri
+              title
+            }
+          }
+        }
+        allWpCategory {
+          nodes {
+            name
+          }
+        }
+        allWpTag {
+          nodes {
+            name
+          }
         }
       }
-    }
-  `)
+    `).then(result => {
+      if (result.errors) {
+        console.log(result.errors);
+        reject(result.errors);
+      } else {
+        const { allWpPost, allWpPage, allWpCategory, allWpTag } = result.data;
 
-  const perPage = wpSettings.wp.readingSettings.postsPerPage || 10
-  const blogURI = "/"
-  const templates = getTemplates()
+        const sortedPosts = allWpPost.edges
+          .map(edge => edge.node)
+          .sort((a, b) => new Date(a.date) - new Date(b.date));
+        const sortedPages = allWpPage.edges
+          .map(edge => edge.node)
+          .sort((a, b) => new Date(a.date) - new Date(b.date));
 
-  await createContentTypes(props, { templates })
-  await createBlog(props, { perPage, blogURI })
-  await createCategories(props, { perPage })
-  await createAuthors(props, { perPage })
-}
+        sortedPosts.forEach(post => {
+          const { date, slug } = post;
+          const preSlug = moment(new Date(date)).format('YYYY/MM/DD');
+          const formattedURI = `${preSlug}/${slug}`;
+          createPage({
+            path: formattedURI,
+            component: slash(postTemplate),
+            context: { id: post.id, uri: formattedURI },
+          });
+        });
 
-const { createRemoteFileNode } = require(`gatsby-source-filesystem`)
+        sortedPages.forEach(post => {
+          const { uri } = post;
+          createPage({
+            path: uri,
+            component: slash(pageTemplate),
+            context: { id: post.id },
+          });
+        });
 
-// We do this, because the Avatar doesn't get handled as a File from the gatsby-source plugin yet. This might change in the future.
-exports.createResolvers = async ({
-  actions,
-  cache,
-  createNodeId,
-  createResolvers,
-  store,
-  reporter,
-}) => {
-  const { createNode } = actions
+        allWpCategory.nodes.forEach(node => {
+          const name = node.name;
+          const categoryPath = `/categories/${_.kebabCase(name)}/`;
+          createPage({
+            path: categoryPath,
+            component: categoryTemplate,
+            context: { category: name },
+          });
+        });
 
-  await createResolvers({
-    WpAvatar: {
-      imageFile: {
-        type: "File",
-        async resolve(source) {
-          let sourceUrl = source.url
+        allWpTag.nodes.forEach(node => {
+          const name = node.name;
+          const tagPath = `/tag/${_.kebabCase(name)}/`;
+          createPage({
+            path: tagPath,
+            component: tagTemplate,
+            context: { tag: name },
+          });
+        });
 
-          return await createRemoteFileNode({
-            url: encodeURI(sourceUrl),
-            store,
-            cache,
-            createNode,
-            createNodeId,
-            reporter,
-          })
-        },
-      },
-    },
-  })
-}
+        resolve();
+      }
+    });
+  });
+};

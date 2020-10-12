@@ -1,0 +1,11 @@
+- url: https://gastby-starter-zeevo.netlify.com/
+  repo: https://github.com/zeevosec/gatsby-starter-wordpress-blog
+  description: Yet another Blog starter with a different style
+  tags:
+    - Blog
+    - Markdown
+    - SEO
+  features:
+    - Extendable
+    - Feature filters
+    - Performant

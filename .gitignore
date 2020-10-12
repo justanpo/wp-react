@@ -1,10 +1,4 @@
-# IDEA
-
-.idea
-
-# WordPress
-WordPress
-.wordpress-cache
+WordPress/GraphQL
 
 # Logs
 logs
@@ -62,13 +56,13 @@ typings/
 # dotenv environment variables file
 .env
 
+.history
 .cache/
 public
 yarn-error.log
 .DS_Store
 .env.*
 !.env.GATSBY_CONCURRENT_DOWNLOAD
-!.env.example
 .DS_Store
 
-
+.wordpress-cache
