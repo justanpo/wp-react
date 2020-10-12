@@ -7,23 +7,22 @@ const Footer = ({}) => {
       <div className="section-inner">
         <div className="footer-credits">
           <p className="footer-copyright">
-            © {new Date().getFullYear()}{" "}
-            <Link to={"/"}>Gatsby Starter WordPress Twenty Twenty</Link>
+            © {new Date().getFullYear()} <Link to={"/"}>Prodg React</Link>
           </p>
           <p>
             <a
               className="powered-by-wordpress"
-              href="https://www.henrikwirth.com"
+              href="http://prodg.pro"
               rel="noreferrer noopener"
             >
-              Proudly presented by Henrik Wirth
+              ProDG
             </a>
           </p>
         </div>
 
         <a className="to-the-top" href="#site-header">
           <span className="to-the-top-long">
-            To the top{" "}
+            Наверх{" "}
             <span className="arrow" aria-hidden="true">
               ↑
             </span>
