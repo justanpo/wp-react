@@ -3,7 +3,6 @@ import CloseIcon from "../assets/svg/close.inline.svg"
 import { graphql, useStaticQuery } from "gatsby"
 import stopPropagation from "../utils/stop-propagation"
 import UniversalLink from "./UniversalLink"
-import SocialMenu from "./SocialMenu"
 
 const MenuModal = ({ isActive, toggleBackdrop }) => {
   const { wpMenu } = useStaticQuery(graphql`
@@ -19,7 +18,7 @@ const MenuModal = ({ isActive, toggleBackdrop }) => {
               node {
                 ... on WpContentNode {
                   uri
-                } 
+                }
               }
             }
           }
@@ -61,7 +60,8 @@ const MenuModal = ({ isActive, toggleBackdrop }) => {
             >
               <ul className="modal-menu reset-list-style">
                 {wpMenu.menuItems.nodes.map((menuItem, i) => {
-                  const path = menuItem?.connectedNode?.node?.uri ?? menuItem.url
+                  const path =
+                    menuItem?.connectedNode?.node?.uri ?? menuItem.url
 
                   const itemId = "modal-menu-item-" + menuItem.databaseId
 
@@ -93,7 +93,8 @@ const MenuModal = ({ isActive, toggleBackdrop }) => {
             <nav className="mobile-menu" aria-label="Mobile" role="navigation">
               <ul className="modal-menu reset-list-style">
                 {wpMenu.menuItems.nodes.map((menuItem, i) => {
-                  const path = menuItem?.connectedNode?.node?.uri ?? menuItem.url
+                  const path =
+                    menuItem?.connectedNode?.node?.uri ?? menuItem.url
 
                   const itemId = "modal-mobile-menu-item-" + menuItem.databaseId
 
@@ -121,10 +122,6 @@ const MenuModal = ({ isActive, toggleBackdrop }) => {
                 })}
               </ul>
             </nav>
-          </div>
-
-          <div className="menu-bottom">
-            <SocialMenu isExpanded />
           </div>
         </div>
       </div>
