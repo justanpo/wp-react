@@ -1349,7 +1349,7 @@ ul.social-icons li {
   text-align: center;
 }
 
-#GatsbyBody:not(.enable-search-modal) .header-titles-wrapper {
+body:not(.enable-search-modal) .header-titles-wrapper {
   justify-content: flex-start;
   padding-left: 0;
   text-align: left;
@@ -1403,7 +1403,7 @@ ul.social-icons li {
   width: auto;
 }
 
-#GatsbyBody:not(.enable-search-modal) .site-logo img {
+body:not(.enable-search-modal) .site-logo img {
   margin: 0;
 }
 
@@ -1619,14 +1619,14 @@ ul.primary-menu {
   text-decoration: underline;
 }
 
-.primary-menu li > a.current-menu-item,
+.primary-menu li.current-menu-item > a,
 .primary-menu li.current-menu-item > .link-icon-wrapper > a {
   text-decoration: underline;
 }
 
-.primary-menu li > a.current-menu-item:hover,
+.primary-menu li.current-menu-item > a:hover,
 .primary-menu li.current-menu-item > .link-icon-wrapper > a:hover,
-.primary-menu li > a.current-menu-item:focus,
+.primary-menu li.current-menu-item > a:focus,
 .primary-menu li.current-menu-item > .link-icon-wrapper > a:focus {
   text-decoration: none;
 }
@@ -1752,12 +1752,12 @@ ul.primary-menu {
 }
 
 /* Repeat previous rules for IE11 (when JS enabled for polyfill). */
-#GatsbyBody.touch-enabled .primary-menu > li.menu-item-has-children > a {
+body.touch-enabled .primary-menu > li.menu-item-has-children > a {
   padding-right: 0;
   margin-right: 2rem;
 }
 
-#GatsbyBody.touch-enabled .primary-menu ul li.menu-item-has-children > a {
+body.touch-enabled .primary-menu ul li.menu-item-has-children > a {
   margin-right: 4.5rem;
   padding-right: 0;
   width: unset;
@@ -2205,7 +2205,7 @@ button.search-untoggle {
   color: #fff;
 }
 
-#GatsbyBody.template-cover .entry-header {
+body.template-cover .entry-header {
   background: transparent;
   padding: 0;
 }
@@ -2258,31 +2258,31 @@ button.search-untoggle {
 /*	7c. Template: Full Width
 /* -------------------------------------------------------------------------- */
 
-#GatsbyBody.template-full-width
+body.template-full-width
   .entry-content
   > *:not(.alignwide):not(.alignfull):not(.alignleft):not(.alignright):not(.is-style-wide),
-#GatsbyBody.template-full-width
+body.template-full-width
   [class*="__inner-container"]
   > *:not(.alignwide):not(.alignfull):not(.alignleft):not(.alignright):not(.is-style-wide) {
   max-width: 120rem;
 }
 
-#GatsbyBody.template-full-width .entry-content .alignleft,
-#GatsbyBody.template-full-width .entry-content .alignright {
+body.template-full-width .entry-content .alignleft,
+body.template-full-width .entry-content .alignright {
   position: static;
 }
 
-#GatsbyBody.template-full-width .entry-content .alignleft,
-#GatsbyBody.template-full-width
+body.template-full-width .entry-content .alignleft,
+body.template-full-width
   [class*="wp-block"].alignwide
   [class*="__inner-container"]
   > .alignleft,
-#GatsbyBody.template-full-width
+body.template-full-width
   [class*="wp-block"].alignwide
   [class*="__inner-container"]
   > p
   .alignleft,
-#GatsbyBody.template-full-width
+body.template-full-width
   [class*="wp-block"].alignwide
   [class*="__inner-container"]
   > .wp-block-image
@@ -2292,17 +2292,17 @@ button.search-untoggle {
   position: static;
 }
 
-#GatsbyBody.template-full-width .entry-content > .alignleft,
-#GatsbyBody.template-full-width
+body.template-full-width .entry-content > .alignleft,
+body.template-full-width
   [class*="wp-block"].alignfull:not(.has-background)
   [class*="__inner-container"]
   > .alignleft,
-#GatsbyBody.template-full-width
+body.template-full-width
   [class*="wp-block"].alignfull:not(.has-background)
   [class*="__inner-container"]
   > p
   .alignleft,
-#GatsbyBody.template-full-width
+body.template-full-width
   [class*="wp-block"].alignfull:not(.has-background)
   [class*="__inner-container"]
   > .wp-block-image
@@ -2312,17 +2312,17 @@ button.search-untoggle {
   position: static;
 }
 
-#GatsbyBody.template-full-width .entry-content .alignright,
-#GatsbyBody.template-full-width
+body.template-full-width .entry-content .alignright,
+body.template-full-width
   [class*="wp-block"].alignwide
   [class*="__inner-container"]
   > .alignright,
-#GatsbyBody.template-full-width
+body.template-full-width
   [class*="wp-block"].alignwide
   [class*="__inner-container"]
   > p
   .alignright,
-#GatsbyBody.template-full-width
+body.template-full-width
   [class*="wp-block"].alignwide
   [class*="__inner-container"]
   > .wp-block-image
@@ -2332,17 +2332,17 @@ button.search-untoggle {
   position: static;
 }
 
-#GatsbyBody.template-full-width .entry-content > .alignright,
-#GatsbyBody.template-full-width
+body.template-full-width .entry-content > .alignright,
+body.template-full-width
   [class*="wp-block"].alignfull:not(.has-background)
   [class*="__inner-container"]
   > .alignright,
-#GatsbyBody.template-full-width
+body.template-full-width
   [class*="wp-block"].alignfull:not(.has-background)
   [class*="__inner-container"]
   > p
   .alignright,
-#GatsbyBody.template-full-width
+body.template-full-width
   [class*="wp-block"].alignfull:not(.has-background)
   [class*="__inner-container"]
   > .wp-block-image
@@ -2381,7 +2381,7 @@ button.search-untoggle {
 
 /* Posts ------------------------------------- */
 
-#GatsbyBody:not(.singular) main > article:first-of-type {
+body:not(.singular) main > article:first-of-type {
   padding: 4rem 0 0;
 }
 
@@ -4996,13 +4996,13 @@ a.to-the-top > * {
 
   /* Template: Full Width ------------------ */
 
-  #GatsbyBody.template-full-width
+  body.template-full-width
     .entry-content
     > *:not(.alignwide):not(.alignfull):not(.alignleft):not(.alignright):not(.is-style-wide) {
     width: calc(100% - 8rem);
   }
 
-  #GatsbyBody.template-full-width
+  body.template-full-width
     .alignfull:not(.has-background)
     > .wp-block-group__inner-container
     > p:not(.has-background-color) {
@@ -5010,16 +5010,16 @@ a.to-the-top > * {
     padding-right: 4rem;
   }
 
-  #GatsbyBody.template-full-width
+  body.template-full-width
     [class*="wp-block"].alignfull
     [class*="__inner-container"]
     > .alignleft,
-  #GatsbyBody.template-full-width
+  body.template-full-width
     [class*="wp-block"].alignfull
     [class*="__inner-container"]
     > p
     .alignleft,
-  #GatsbyBody.template-full-width
+  body.template-full-width
     [class*="wp-block"].alignfull
     [class*="__inner-container"]
     > .wp-block-image
@@ -5028,16 +5028,16 @@ a.to-the-top > * {
     margin-left: 4rem;
   }
 
-  #GatsbyBody.template-full-width
+  body.template-full-width
     [class*="wp-block"].alignfull
     [class*="__inner-container"]
     > .alignright,
-  #GatsbyBody.template-full-width
+  body.template-full-width
     [class*="wp-block"].alignfull
     [class*="__inner-container"]
     > p
     .alignright,
-  #GatsbyBody.template-full-width
+  body.template-full-width
     [class*="wp-block"].alignfull
     [class*="__inner-container"]
     > .wp-block-image
@@ -5060,7 +5060,7 @@ a.to-the-top > * {
     font-size: 3.2rem;
   }
 
-  #GatsbyBody:not(.singular) main > article:first-of-type {
+  body:not(.singular) main > article:first-of-type {
     padding: 8rem 0 0;
   }
 
@@ -6369,12 +6369,12 @@ a.to-the-top > * {
 @media (min-width: 1240px) {
   /* Blocks -------------------------------- */
 
-  #GatsbyBody.template-full-width .entry-content > .alignleft {
+  body.template-full-width .entry-content > .alignleft {
     /*rtl:ignore*/
     margin-left: calc((100vw - 120rem) / 2);
   }
 
-  #GatsbyBody.template-full-width .entry-content > .alignright {
+  body.template-full-width .entry-content > .alignright {
     /*rtl:ignore*/
     margin-right: calc((100vw - 120rem) / 2);
   }
@@ -6483,7 +6483,7 @@ a.to-the-top > * {
 
   /* Template: Full Width ------------------ */
 
-  #GatsbyBody.template-full-width
+  body.template-full-width
     .alignfull:not(.has-background)
     > .wp-block-group__inner-container
     > p:not(.has-background-color) {
@@ -6491,7 +6491,7 @@ a.to-the-top > * {
     padding-right: 0;
   }
 
-  #GatsbyBody.template-full-width
+  body.template-full-width
     [class*="wp-block"].alignfull
     [class*="__inner-container"]
     > .wp-block-image
@@ -6500,7 +6500,7 @@ a.to-the-top > * {
     margin-left: 0;
   }
 
-  #GatsbyBody.template-full-width
+  body.template-full-width
     [class*="wp-block"].alignfull
     [class*="__inner-container"]
     > .wp-block-image

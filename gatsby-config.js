@@ -1,5 +1,5 @@
 require("dotenv").config({
-  path: `.env.GATSBY_CONCURRENT_DOWNLOAD`,
+  path: `.env`,
 })
 
 // require .env.development or .env.production
@@ -8,7 +8,13 @@ require("dotenv").config({
 })
 
 module.exports = {
+  siteMetadata: {
+    title: `Gatsby WordPress Twenty Twenty`,
+    description: `Gatsby starter site for Twenty Twenty Gatsby Theme.`,
+    author: `@henrikwirth`,
+  },
   plugins: [
+    `gatsby-plugin-notifications`,
     `gatsby-plugin-sharp`,
     {
       resolve: `gatsby-source-filesystem`,
@@ -17,10 +23,11 @@ module.exports = {
         path: `${__dirname}/src/assets/images`,
       },
     },
+    `gatsby-plugin-netlify-cache`,
     {
       resolve: `gatsby-source-wordpress-experimental`,
       options: {
-        url: process.env.WPGRAPHQL_URL || `http://andrey35.beget.tech/graphql`,
+        url: `http://andrey35.beget.tech/graphql`,
         verbose: true,
         develop: {
           hardCacheMediaFiles: true,
@@ -30,19 +37,31 @@ module.exports = {
             writeQueriesToDisk: true,
           },
         },
+        html: {
+          fallbackImageMaxWidth: 800,
+        },
+        // fields can be excluded globally.
+        // this example is for wp-graphql-gutenberg.
+        // since we can get block data on the `block` field
+        // we don't need these fields
+        excludeFieldNames: [`blocksJSON`, `saveContent`],
         type: {
           Post: {
             limit:
               process.env.NODE_ENV === `development`
                 ? // Lets just pull 50 posts in development to make it easy on ourselves.
-                  50
-                : // and we don't actually need more than 5000 in production for this particular site
-                  5000,
+                  35
+                : // And then we can pull all posts in production
+                  null,
+          },
+          // this shows how to exclude entire types from the schema
+          // this example is for wp-graphql-gutenberg
+          CoreParagraphBlockAttributesV2: {
+            exclude: true,
           },
         },
       },
     },
-    `gatsby-plugin-chakra-ui`,
     `gatsby-transformer-sharp`,
     {
       resolve: "gatsby-plugin-react-svg",
@@ -52,6 +71,5 @@ module.exports = {
         },
       },
     },
-    `gatsby-plugin-netlify-cache`,
   ],
 }

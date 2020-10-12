@@ -1,21 +1,42 @@
-import React from "react"
-import { Box, Grid } from "@chakra-ui/core"
-import Header from "./header"
-import Menu from "./menu"
+import React, { useState } from "react"
+import Header from "./Header"
+import Footer from "./Footer"
 
-import "../assets/style.css"
+import FooterMenusWidgets from "./FooterMenusWidgets"
+import MenuModal from "./MenuModal"
 
-const Layout = ({ children }) => (
-  <div>
-    <Grid style={{ margin: `0 auto` }} maxW="90%" w={900} alignSelf="center">
-      <Box mb={10} mt={20}>
-        <Header />
-      </Box>
-      <Menu />
+const backdropClasses = " backdrop"
 
-      <Box mb={100}>{children}</Box>
-    </Grid>
-  </div>
-)
+const Layout = ({ children, bodyClass }) => {
+  const [backdropActive, setBackdropActive] = useState(false)
+
+  const toggleBackdrop = (e, active) => {
+    e.preventDefault()
+    setBackdropActive(active)
+  }
+
+  return (
+    <div
+      id={"GatsbyBody"}
+      className={
+        bodyClass +
+        " showing-menu-modal showing-modal" +
+        (backdropActive ? backdropClasses : "")
+      }
+    >
+      <Header toggleBackdrop={toggleBackdrop} />
+
+      <MenuModal isActive={backdropActive} toggleBackdrop={toggleBackdrop} />
+
+      <main id="site-content" role="main">
+        {children}
+      </main>
+
+      <FooterMenusWidgets />
+
+      <Footer />
+    </div>
+  )
+}
 
 export default Layout

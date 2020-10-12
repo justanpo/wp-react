@@ -1,11 +1,10 @@
-import React from 'react'
-import { Heading, Box } from '@chakra-ui/core';
-import Layout from '../components/layout';
+import React from "react"
+import Layout from "../components/Layout"
 
 export default () => (
-    <Layout>
-        <Box>
-            <Heading as="h1" size="xl">Oops, that's a 404</Heading>
-        </Box>
-    </Layout>
+  <Layout>
+    <div>
+      <h1>Oops, that's a 404</h1>
+    </div>
+  </Layout>
 )

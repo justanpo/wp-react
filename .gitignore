@@ -1,3 +1,11 @@
+# IDEA
+
+.idea
+
+# WordPress
+WordPress
+.wordpress-cache
+
 # Logs
 logs
 *.log
@@ -60,6 +68,7 @@ yarn-error.log
 .DS_Store
 .env.*
 !.env.GATSBY_CONCURRENT_DOWNLOAD
+!.env.example
 .DS_Store
 
-.wordpress-cache
+
